@@ -1,0 +1,37 @@
+:root {
+    --wrapper-width: 500px;
+    --wrapper-height: 500px;
+}
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(44, 44, 44);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-container {
+    background-color: aliceblue;
+    width: var(--wrapper-width);
+    height: var(--wrapper-height);
+    margin-right: 100px;
+}
+
+.left-container {
+    display: flex;
+    justify-content: center;
+    width: var(--wrapper-width);
+    height: var(--wrapper-height);
+    margin-left: 100px;
+    border: 1px solid red;
+}
+
+.title {
+    font-size: 3em;
+    text-decoration: underline;
+}
