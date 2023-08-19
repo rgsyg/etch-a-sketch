@@ -37,8 +37,8 @@ function createGrid(gridSize) {
 function randomizeColor(random = true) {
     isRandomized = random;
     setColor();
+    
     if (random) {
-        console.log('called');
         randomizeExit.classList.add('active');
     } else {
         randomizeExit.classList.remove('active');
@@ -46,20 +46,24 @@ function randomizeColor(random = true) {
 }
 
 function setColor() {
-    let color;
+    let color = colorPicker.value;
     squares = document.querySelectorAll('.square');
-    if (!isRandomized) {
-        color = this.value;
-        squares.forEach((square) => square.addEventListener('mouseenter', () => 
-            square.style.backgroundColor = color === undefined ? 'black' : color
-        ));
+
+    if (isRandomized) {
+        color = `hsl(${~~(Math.random() * 255)}, 100%, 50%)`;   
     }
-    else {
-        color = `hsl(${~~(Math.random() * 255)}, 100%, 50%)`;
-        squares.forEach((square) => square.addEventListener('mouseenter', () => 
-            square.style.backgroundColor = color === undefined ? 'black' : color
-        ));
-    }
+    
+    squares.forEach((square) => square.addEventListener('mouseenter', () => 
+        square.style.backgroundColor = color
+    ));
+}
+
+function setColorOnPick() {
+    let color = this.value || colorPicker.value;
+
+    squares.forEach((square) => square.addEventListener('mouseenter', () => 
+        square.style.backgroundColor = color
+    ));
 }
 
 function setGridNumber() {
@@ -80,6 +84,6 @@ function setGridNumber() {
 }
 
 selectGridButton.addEventListener('click', setGridNumber);
-colorPicker.addEventListener('change', setColor);
+colorPicker.addEventListener('change', setColorOnPick);
 randomizeButton.addEventListener('click', randomizeColor);
 randomizeExit.addEventListener('click', randomizeColor.bind('', false));
