@@ -3,19 +3,17 @@ const selectGridButton = document.querySelector('#gridNumber');
 
 let squares = '';
 
-let [row, column, gridSize] = [16, 16, 16];
-
 const gridContainerSize = {
     width: gridContainer.offsetWidth,
     height: gridContainer.offsetHeight
 }
 
-createGrid(16, 16, 16);
+createGrid(16);
 
 
-function createGrid(row, column, gridSize) {
-    for (let i = 0; i < row; i++) {
-        for (let j = 0; j < column; j++) {
+function createGrid(gridSize) {
+    for (let row = 0; row < gridSize; row++) {
+        for (let column = 0; column < gridSize; column++) {
             const gridSquare = document.createElement('div');
             gridSquare.style.width = gridContainerSize.width / gridSize + 'px';
             gridSquare.style.height = gridContainerSize.height / gridSize + 'px';
@@ -49,7 +47,7 @@ function setGridNumber() {
     squares.forEach((square) => square.remove());
     breaks.forEach((divBreak) => divBreak.remove());
 
-    createGrid(numberOfGrids, numberOfGrids, numberOfGrids);
+    createGrid(numberOfGrids);
 }
 
 selectGridButton.addEventListener('click', setGridNumber);
