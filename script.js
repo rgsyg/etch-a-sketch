@@ -5,6 +5,8 @@ const randomizeButton = document.querySelector('#randomizeColor');
 const randomizeExit = document.querySelector('#exit');
 const darkenCheckbox = document.querySelector('#darkEffect');
 
+let color;
+let darkness;
 let isRandomized = false;
 let squares = '';
 
@@ -47,7 +49,8 @@ function randomizeColor(random = true) {
 }
 
 function setColor() {
-    let color = colorPicker.value;
+    darkness = 1;
+    color = colorPicker.value;
     squares = document.querySelectorAll('.square');
 
     if (isRandomized) {
@@ -60,7 +63,8 @@ function setColor() {
 }
 
 function setColorOnPick() {
-    let color = this.value || colorPicker.value;
+    darkness = 1;
+    color = this.value || colorPicker.value;
 
     squares.forEach((square) => square.addEventListener('mouseenter', () => 
         square.style.backgroundColor = color
@@ -84,12 +88,27 @@ function setGridNumber() {
     createGrid(numberOfGrids);
 }
 
-function logText() {
-    console.log(this.checked);
+function darkenPixel(e) {
+    darkness = 1;
+    if (e.target.checked) {
+        squares.forEach((square) => square.addEventListener('mouseenter', () => {
+            if (darkness < 0.1) {
+                darkness = 0;
+            } else {
+                darkness -= 0.1;
+            }
+            console.log(darkness);
+            square.style.filter = `brightness(${darkness})`;
+        }))
+    }
+    else {
+        darkness = 1;
+        squares.forEach((square) => square.addEventListener('mouseenter', () => square.style.filter = `brightness(1)`));
+    }
 }
 
 selectGridButton.addEventListener('click', setGridNumber);
 colorPicker.addEventListener('change', setColorOnPick);
 randomizeButton.addEventListener('click', randomizeColor);
 randomizeExit.addEventListener('click', randomizeColor.bind('', false));
-darkenCheckbox.addEventListener('change', logText);
+darkenCheckbox.addEventListener('change', darkenPixel);
