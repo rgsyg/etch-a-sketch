@@ -73,26 +73,44 @@ body {
     margin-bottom: 20px;
 }
 
-.input-gridNumber{
+.input-gridNumber, .input-color {
     margin-bottom: 15px;
 }
 
-.input-color, .input-gridNumber {
+.input-color, .input-gridNumber, .input-randomizeColor {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-#gridNumber {
-    width: 3em;
+#gridNumber, #randomizeColor, #exit {
     text-align: center;
     background-color: aliceblue;
     border: 3px outset black;
     font-size: 0.90em;
 }
 
-#gridNumber:active {
+#gridNumber {
+    width: 3em;
+}
+
+#randomizeColor {
+    width: 6em;
+}
+
+#exit {
+    width: 1.5em;
+    background-color: red;
+    border-radius: 20px;
+    display: none;
+}
+
+#gridNumber:active, #randomizeColor:active, #exit:active {
     border-style: inset;
+}
+
+#exit.active {
+    display: block;
 }
 
 #color {
