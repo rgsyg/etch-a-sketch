@@ -1,5 +1,6 @@
 const gridContainer = document.querySelector('.grid-squares');
 const selectGridButton = document.querySelector('#gridNumber');
+const colorPicker = document.querySelector('#color');
 
 let squares = '';
 
@@ -9,7 +10,6 @@ const gridContainerSize = {
 }
 
 createGrid(16);
-
 
 function createGrid(gridSize) {
     for (let row = 0; row < gridSize; row++) {
@@ -22,16 +22,20 @@ function createGrid(gridSize) {
             gridSquare.classList.add('square');
             gridContainer.appendChild(gridSquare);
         }
+
         const breakDiv = document.createElement('div');
         breakDiv.classList.add('break');
         gridContainer.appendChild(breakDiv)
     }
+
     squares = document.querySelectorAll('.square');
-    squares.forEach((square) => square.addEventListener('mouseenter', setColor));
+    squares.forEach((square) => square.addEventListener('mouseenter', () => square.style.backgroundColor = 'blue'));
 }
 
 function setColor() {
-    this.style.backgroundColor = 'blue';
+    const color = this.value;
+    squares = document.querySelectorAll('.square');
+    squares.forEach((square) => square.addEventListener('mouseenter', () => square.style.backgroundColor = color));
 }
 
 function setGridNumber() {
@@ -51,3 +55,4 @@ function setGridNumber() {
 }
 
 selectGridButton.addEventListener('click', setGridNumber);
+colorPicker.addEventListener('change', setColor);
