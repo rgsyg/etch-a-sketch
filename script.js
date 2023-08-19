@@ -3,6 +3,7 @@ const selectGridButton = document.querySelector('#gridNumber');
 const colorPicker = document.querySelector('#color');
 const randomizeButton = document.querySelector('#randomizeColor');
 const randomizeExit = document.querySelector('#exit');
+const darkenCheckbox = document.querySelector('#darkEffect');
 
 let isRandomized = false;
 let squares = '';
@@ -83,7 +84,12 @@ function setGridNumber() {
     createGrid(numberOfGrids);
 }
 
+function logText() {
+    console.log(this.checked);
+}
+
 selectGridButton.addEventListener('click', setGridNumber);
 colorPicker.addEventListener('change', setColorOnPick);
 randomizeButton.addEventListener('click', randomizeColor);
 randomizeExit.addEventListener('click', randomizeColor.bind('', false));
+darkenCheckbox.addEventListener('change', logText);
